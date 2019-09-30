@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+ <div>Quiz ends in <span id="timer">05:00</span> minutes!</div>
+<h1>Trivia Quiz</h1>
+<p>What is 5 x 5?</p>
+<input type="radio" id="a1" + name="question0" value="25">
+25
+<br>
+<input type="radio" id="b1" + name="question0" value="55">
+55
+<br>
+<input type="radio" id="c1" + name="question0" value="10">
+10
+<br>
+<p>What is 5 + 5?</p>
+<input type="radio" id="a2" + name="question1" value="25">
+25
+<br>
+<input type="radio" id="b2" + name="question1" value="55">
+55
+<br>
+<input type="radio" id="c2" + name="question1" value="10">
+10
+<br>
+<p>What is 10 x 10?</p>
+<input type="radio" id="a3" + name="question2" value="20">
+20
+<br>
+<input type="radio" id="b3" + name="question2" value="100">
+100
+<br>
+<input type="radio" id="c3" + name="question2" value="1000">
+1000
+<br>
+<p>What is 150 + 150?</p>
+<input type="text">
+<form name="quizForm" id="quizForm" />
+<script language="javascript">
+function timerStart(duration, display) {
+var timer = duration, mins, secs;
+	setInterval(function () {
+        mins = parseInt(timer / 60, 10);
+        secs = parseInt(timer % 60, 10);
+        mins = mins < 10 ? "0" + mins : mins;
+        secs = secs < 10 ? "0" + secs : secs;
+        display.textContent = mins + ":" + secs;
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+window.onload = function () {
+    var fivemins = 60 * 5,
+        display = document.querySelector('#timer');
+    timerStart(fivemins, display);
+};
+var myArray = new Array();
+//Question 1
+myArray[0] = new Array();
+myArray[0][0] = "1";
+myArray[0][1] = "a";
+myArray[0][2] = "multipleChoice";
+myArray[0][3] = "What is 5 x 5?";
+myArray[0][4] = "25";
+myArray[0][5] = "55";
+myArray[0][6] = "10";
+
+//Question 2
+myArray[1] = new Array();
+myArray[1][0] = "2";
+myArray[1][1] = "c";
+myArray[1][2] = "multipleChoice";
+myArray[1][3] = "What is 5 + 5?";
+myArray[1][4] = "25";
+myArray[1][5] = "55";
+myArray[1][6] = "10";
+
+//Question 3
+myArray[2] = new Array();
+myArray[2][0] = "3";
+myArray[2][1] = "b";
+myArray[2][2] = "multipleChoice";
+myArray[2][3] = "What is 10 x 10?";
+myArray[2][4] = "20";
+myArray[2][5] = "100";
+myArray[2][6] = "1000";
+
+//question 4
+myArray[3] = new Array();
+myArray[3][0] = "4";
+myArray[3][1] = "300";
+myArray[3][2] = "fillInTheBlank";
+
+for (a = 0; a < myArray.length; a++)
+	{
+	renderQuestion(a);
+	}
+function renderQuestion(i) {
+	//alert("I am in the renderQuestion function and the value of i = " + i);
+	var questionName = "question" +i;
+	
+	//document.write("<p>" + myArray[i][3] + "</p>");
+	//document.write("input type='radio' id='" + 'a' + myArray[i][0] + "' + name='" + questionName + "' value='" + myArray[i][4] + "'>" + myArray[i][4] + "<br>");
+	//document.write("input type='radio' id='" + 'a' + myArray[i][0] + "' + name='" + questionName + "' value='" + myArray[i][4] + "'>" + myArray[i][5] + "<br>");
+	//document.write("input type='radio' id='" + 'a' + myArray[i][0] + "' + name='" + questionName + "' value='" + myArray[i][5] + "'>" + myArray[i][6] + "<br>");
+}
+function testAnswers()
+	{
+	var userSelected = "";
+	correct = 0;
+	incorrect = 0;
+	for (i = 0; i < myArray.length; i++)
+	{
+		var correctAnswer = myArray[i][1]
+			alert("the correct answer is " + correctAnswer);
+		var myElement = "a" + (i+1);
+			//alert("debug - myelement = " + myElement);
+		if(document.getElementById(myElement).checked == true)
+			{
+				userSelected = "a";
+			}
+		var myElement = "b" + (i+1);
+		
+		if(document.getElementById(myElement).checked == true)
+			{
+				userSelected = "b";
+			}
+		var myElement = "c" + (i+1);
+		if(document.getElementById(myElement).checked == true)
+			{
+				userSelected = "c";
+			}
+		alert("You selected " + userSelected);
+		
+		if(userSelected==correctAnswer)
+			correct++;
+		else
+			incorrect++;
+		alert("correct = " + correct);
+		alert("incorrect = " + incorrect);
+	}
+}
+</script>
+</form>
+<input type ="submit" onClick="return testAnswers()">
+</body>
+</html>
